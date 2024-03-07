@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ba9aff18-ae67-443f-ac22-2f8aa8de1d78",
+    "title": "Note 1",
+    "text": "This is the text for Note 1. It can contain any information you want to include.",
+    "date": "4/3/24"
+  },
+  {
+    "id": "d7ee648c-31ab-4d25-b74f-c4e5e794e5aa",
+    "title": "Note 2",
+    "text": "This is the text for Note 2. You can write whatever you need in this note.",
+    "date": "4/3/24"
+  },
+  {
+    "id": "03e8a860-6a1e-4dfa-b4ea-efd5fab2f28c",
+    "title": "Note 3",
+    "text": "This is the text for Note 3. Feel free to customize it as per your requirements.",
+    "date": "4/3/24"
+  }
+]

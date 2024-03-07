@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>note app express js</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">NotesAPP</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul
+            class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+            style="--bs-scroll-height: 100px"
+          >
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Link
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container p-0 mt-5 mb-3">
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        data-bs-whatever="@mdo"
+      >
+        <i class="bi bi-plus-lg"></i>
+        Add Note
+      </button>
+    </div>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New note</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form action="/notes" method="post">
+              <div class="mb-3">
+                <label for="title-name" class="col-form-label">Title:</label>
+                <input
+                  type="text"
+                  name="title"
+                  class="form-control"
+                  id="title-name"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="note-text" class="col-form-label">Note:</label>
+                <textarea
+                  name="text"
+                  class="form-control"
+                  id="note-text"
+                ></textarea>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  <i class="bi bi-arrow-90deg-up"></i> Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-floppy"></i> Save Note
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main
+      class="container m-auto row p-3 align-items-start gap-3 bg-secondary bg-gradient rounded"
+      data-masonry='{"percentPosition": true }'
+    >
+      <% notes.forEach(note => { %>
+      <div class="card m-2" style="width: 18rem">
+        <div class="note-head">
+          <p class="note-date m-auto"><%= note.date %></p>
+        </div>
+        <div class="card-body pt-0">
+          <h5 class="card-title"><%= note.title %></h5>
+          <p class="card-text"><%= note.text %></p>
+        </div>
+        <div class="card-body d-flex gap-1">
+          <a
+            href="/notes/<%= note.id %>/detail"
+            class="btn btn-success btn-open"
+            ><i class="bi bi-arrows-angle-expand"></i> Open</a
+          >
+          <a href="/notes/<%= note.id %>/edit" class="btn btn-warning"
+            ><i class="bi bi-pencil"></i> Edit</a
+          >
+          <form action="/notes/<%= note.id %>?_method=DELETE" method="post">
+            <button class="btn btn-danger">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </form>
+        </div>
+      </div>
+      <% }); %>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+      integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </body>
+</html>
