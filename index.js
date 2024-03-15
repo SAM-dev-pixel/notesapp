@@ -21,7 +21,7 @@ app.get("/notes", (req, res) => {
 app.post("/notes", (req, res) => {
   const id = crypto.randomUUID();
   const date = new Date().getDate();
-  const month = new Date().getMonth();
+  const month = new Date().getMonth() + 1;
   const year = new Date().getFullYear();
   const noteDate = `${date}/${month}/${year}`;
   const { title, text } = req.body;
@@ -52,5 +52,5 @@ app.delete("/notes/:id", (req, res) => {
   res.redirect("/notes");
 });
 app.listen(1000, () => {
-  console.log("http://localhost:1000");
+  console.log("http://localhost:1000/notes");
 });

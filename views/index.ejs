@@ -66,7 +66,7 @@
           </ul>
           <form class="d-flex" role="search">
             <input
-              class="form-control me-2"
+              class="form-control me-2 search-input"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -78,7 +78,6 @@
         </div>
       </div>
     </nav>
-
     <div class="container p-0 mt-5 mb-3">
       <button
         type="button"
@@ -147,35 +146,37 @@
     </div>
 
     <main
-      class="container m-auto row p-3 align-items-start gap-3 bg-secondary bg-gradient rounded"
+      class="container m-auto p-3 bg-secondary bg-gradient rounded"
       data-masonry='{"percentPosition": true }'
     >
-      <% notes.forEach(note => { %>
-      <div class="card m-2" style="width: 18rem">
-        <div class="note-head">
-          <p class="note-date m-auto"><%= note.date %></p>
-        </div>
-        <div class="card-body pt-0">
-          <h5 class="card-title"><%= note.title %></h5>
-          <p class="card-text"><%= note.text %></p>
-        </div>
-        <div class="card-body d-flex gap-1">
-          <a
-            href="/notes/<%= note.id %>/detail"
-            class="btn btn-success btn-open"
-            ><i class="bi bi-arrows-angle-expand"></i> Open</a
-          >
-          <a href="/notes/<%= note.id %>/edit" class="btn btn-warning"
-            ><i class="bi bi-pencil"></i> Edit</a
-          >
-          <form action="/notes/<%= note.id %>?_method=DELETE" method="post">
-            <button class="btn btn-danger">
-              <i class="bi bi-trash"></i> Delete
-            </button>
-          </form>
-        </div>
-      </div>
-      <% }); %>
+      <ul class="row">
+        <% notes.forEach(note => { %>
+        <li class="card m-2 note" style="width: 18rem">
+          <div class="note-head">
+            <p class="note-date m-auto"><%= note.date %></p>
+          </div>
+          <div class="card-body pt-0">
+            <h5 class="card-title"><%= note.title %></h5>
+            <p class="card-text"><%= note.text %></p>
+          </div>
+          <div class="card-body d-flex gap-1">
+            <a
+              href="/notes/<%= note.id %>/detail"
+              class="btn btn-success btn-open"
+              ><i class="bi bi-arrows-angle-expand"></i> Open</a
+            >
+            <a href="/notes/<%= note.id %>/edit" class="btn btn-warning"
+              ><i class="bi bi-pencil"></i> Edit</a
+            >
+            <form action="/notes/<%= note.id %>?_method=DELETE" method="post">
+              <button class="btn btn-danger">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </form>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
     </main>
 
     <script
@@ -190,5 +191,7 @@
       crossorigin="anonymous"
       async
     ></script>
+
+    <script src="/script/index.js"></script>
   </body>
 </html>
